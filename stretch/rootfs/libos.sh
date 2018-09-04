@@ -55,3 +55,10 @@ am_i_root() {
         false
     fi
 }
+
+
+get_total_memory() {
+    local mem_in_kb=""
+    mem_in_kb=$(grep MemTotal /proc/meminfo | awk '{print $2}')
+    echo $(("$mem_in_kb" / 1024))
+}

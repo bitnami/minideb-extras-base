@@ -23,3 +23,12 @@ dir_exists() {
 ensure_dir_exists() {
     dir_exists "${1:-}" "${2:-}"
 }
+
+dir_is_empty() {
+    local dir="${1:?missing directory}"
+    if [ ! -e "$dir" ] || [ -z "$(ls -A "$dir")" ]; then
+        true
+    else
+        false
+    fi
+}
