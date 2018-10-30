@@ -38,7 +38,7 @@ is_boolean_yes() {
 # Arguments:
 #   $1 - Port to validate
 # Returns:
-#   None
+#   Boolean and error message
 #########################
 validate_port() {
     local value
@@ -96,11 +96,31 @@ validate_port() {
 }
 
 ########################
+# Validate if the provided argument is a valid IPv4 address
+# Arguments:
+#   $1 - IP to validate
+# Returns:
+#   Boolean
+#########################
+validate_ipv4() {
+    local ip="${1:?ip is missing}"
+    local stat=1
+
+    if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+	read -r -a ip_array <<< "$(tr '.' ' ' <<< "$ip")"
+        [[ ${ip_array[0]} -le 255 && ${ip_array[1]} -le 255 \
+            && ${ip_array[2]} -le 255 && ${ip_array[3]} -le 255 ]]
+        stat=$?
+    fi
+    return $stat
+}
+
+########################
 # Validate a string format
 # Arguments:
 #   $1 - String to validate
 # Returns:
-#   None
+#   Boolean
 #########################
 validate_string() {
     local string
