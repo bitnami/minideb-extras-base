@@ -5,7 +5,7 @@
 # Functions
 
 ########################
-# Checks if an user exists in the system
+# Check if an user exists in the system
 # Arguments:
 #   $1 - user
 # Returns:
@@ -17,7 +17,7 @@ user_exists() {
 }
 
 ########################
-# Checks if a group exists in the system
+# Check if a group exists in the system
 # Arguments:
 #   $1 - group
 # Returns:
@@ -29,7 +29,7 @@ group_exists() {
 }
 
 ########################
-# Creates a group in the system if it does not exist already
+# Create a group in the system if it does not exist already
 # Arguments:
 #   $1 - group
 # Returns:
@@ -44,7 +44,7 @@ ensure_group_exists() {
 }
 
 ########################
-# Creates an user in the system if it does not exist already
+# Create an user in the system if it does not exist already
 # Arguments:
 #   $1 - user
 #   $2 - group
@@ -65,7 +65,7 @@ ensure_user_exists() {
 }
 
 ########################
-# Checks if the script is currently running as root
+# Check if the script is currently running as root
 # Arguments:
 #   $1 - user
 #   $2 - group
@@ -77,7 +77,7 @@ am_i_root() {
 }
 
 ########################
-# Gets total memory available
+# Get total memory available
 # Arguments:
 #   None
 # Returns:

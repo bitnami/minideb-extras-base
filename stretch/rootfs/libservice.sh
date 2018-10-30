@@ -5,7 +5,7 @@
 # Functions
 
 ########################
-# Reads the provided pid file and returns a PID
+# Read the provided pid file and returns a PID
 # Arguments:
 #   $1 - Pid file
 # Returns:
@@ -18,7 +18,7 @@ get_pid_from_file() {
 }
 
 ########################
-# Checks if a provided PID corresponds to a running service
+# Check if a provided PID corresponds to a running service
 # Arguments:
 #   $1 - PID
 # Returns:
@@ -31,7 +31,7 @@ is_service_running() {
 }
 
 ########################
-# Stops a service by sending a termination signal to its pid
+# Stop a service by sending a termination signal to its pid
 # Arguments:
 #   $1 - Pid file
 # Returns:

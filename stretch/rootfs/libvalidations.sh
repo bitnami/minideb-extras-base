@@ -8,7 +8,7 @@
 # Functions
 
 ########################
-# Checks if the provided argument is an integer
+# Check if the provided argument is an integer
 # Arguments:
 #   $1 - Value to check
 # Returns:
@@ -20,7 +20,7 @@ is_int() {
 }
 
 ########################
-# Checks if the provided argument is a boolean or is the string 'yes/true'
+# Check if the provided argument is a boolean or is the string 'yes/true'
 # Arguments:
 #   $1 - Value to check
 # Returns:
@@ -34,7 +34,7 @@ is_boolean_yes() {
 }
 
 ########################
-# Validates if the provided argument is a valid port
+# Validate if the provided argument is a valid port
 # Arguments:
 #   $1 - Port to validate
 # Returns:
@@ -96,7 +96,7 @@ validate_port() {
 }
 
 ########################
-# Validates a string format
+# Validate a string format
 # Arguments:
 #   $1 - String to validate
 # Returns:

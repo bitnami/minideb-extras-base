@@ -13,7 +13,7 @@ CYAN='\033[38;5;6m'
 # Functions
 
 ########################
-# Prints to STDERR
+# Print to STDERR
 # Arguments:
 #   Message to print
 # Returns:

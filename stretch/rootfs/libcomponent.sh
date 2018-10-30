@@ -13,7 +13,7 @@ DOWNLOAD_URL="https://downloads.bitnami.com/files/stacksmith"
 # Functions
 
 ########################
-# Prints the welcome page for a Bitnami Docker image
+# Download and unpack a Bitnami package
 # Globals:
 #   OS_NAME
 #   OS_ARCH

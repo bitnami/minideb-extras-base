@@ -17,7 +17,7 @@ dns_lookup() {
 }
 
 ########################
-# Gets machine's IP
+# Get machine's IP
 # Arguments:
 #   None
 # Returns:
