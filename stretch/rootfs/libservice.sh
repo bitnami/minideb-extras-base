@@ -14,7 +14,11 @@
 get_pid_from_file() {
     local pid_file="${1:?pid file is missing}"
 
-    [[ -f "$pid_file" ]] && [[ -n "$(< "$pid_file")" ]] && [[ "$(< "$pid_file")" -gt 0 ]] && echo "$pid"
+    if [[ -f "$pid_file" ]]; then
+        if [[ -n "$(< "$pid_file")" ]] && [[ "$(< "$pid_file")" -gt 0 ]]; then
+            echo "$(< "$pid_file")"
+	fi
+    fi
 }
 
 ########################

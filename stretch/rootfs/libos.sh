@@ -73,7 +73,11 @@ ensure_user_exists() {
 #   Boolean
 #########################
 am_i_root() {
-    [[ "$(id -u)" = "0" ]]
+    if [[ "$(id -u)" = "0" ]]; then
+        true
+    else
+	false
+    fi
 }
 
 ########################

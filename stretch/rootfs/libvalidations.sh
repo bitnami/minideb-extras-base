@@ -16,7 +16,11 @@
 #########################
 is_int() {
     local int="${1:?missing value}"
-    [[ "$int" =~ ^-?[0-9]+ ]]
+    if [[ "$int" =~ ^-?[0-9]+ ]]; then
+        true
+    else
+        false
+    fi
 }
 
 ########################
@@ -30,7 +34,11 @@ is_boolean_yes() {
     local bool="${1:-}"
     # comparison is performed without regard to the case of alphabetic characters
     shopt -s nocasematch
-    [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]
+    if [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
+        true
+    else
+        false
+    fi
 }
 
 ########################

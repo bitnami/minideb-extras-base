@@ -2,10 +2,6 @@
 #
 # Library for managing Bitnami components
 
-set -o errexit
-set -o nounset
-set -o pipefail
-
 # Constants
 CACHE_ROOT="/tmp/bitnami/pkg/cache"
 DOWNLOAD_URL="https://downloads.bitnami.com/files/stacksmith"
@@ -32,7 +28,7 @@ component_unpack() {
 
     # Validate arguments
     shift 2
-    while [[ "$#" -gt 0 ]]; do
+    while [ "$#" -gt 0 ]; do
         case "$1" in
             -c|--checksum)
                 shift
@@ -47,11 +43,11 @@ component_unpack() {
     done
 
     echo "Downloading $base_name package"
-    if [[ -f "${CACHE_ROOT}/${base_name}.tar.gz" ]]; then
+    if [ -f "${CACHE_ROOT}/${base_name}.tar.gz" ]; then
         echo "${CACHE_ROOT}/${base_name}.tar.gz already exists, skipping download."
         cp "${CACHE_ROOT}/${base_name}.tar.gz" .
         rm "${CACHE_ROOT}/${base_name}.tar.gz"
-        if [[ -f "${CACHE_ROOT}/${base_name}.tar.gz.sha256" ]]; then
+        if [ -f "${CACHE_ROOT}/${base_name}.tar.gz.sha256" ]; then
             echo "Using the local sha256 from ${CACHE_ROOT}/${base_name}.tar.gz.sha256"
             package_sha256="$(< "${CACHE_ROOT}/${base_name}.tar.gz.sha256")"
             rm "${CACHE_ROOT}/${base_name}.tar.gz.sha256"
@@ -59,7 +55,7 @@ component_unpack() {
     else
 	curl --remote-name --silent "${DOWNLOAD_URL}/${base_name}.tar.gz"
     fi
-    if [[ -n "$package_sha256" ]]; then
+    if [ -n "$package_sha256" ]; then
         echo "Verifying package integrity"
         echo "$package_sha256  ${base_name}.tar.gz" | sha256sum --check -
     fi

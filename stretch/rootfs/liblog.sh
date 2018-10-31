@@ -73,5 +73,7 @@ error() {
 #   None
 #########################
 debug() {
-    [[ "$BITNAMI_DEBUG" = true ]]  && log "${MAGENTA}DEBUG${RESET} ==> ${*}"
+    if [[ "${BITNAMI_DEBUG:-false}" = true ]]; then
+	log "${MAGENTA}DEBUG${RESET} ==> ${*}"
+    fi
 }
