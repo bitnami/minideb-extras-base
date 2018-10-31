@@ -3,8 +3,8 @@
 # Library for managing Bitnami components
 
 # Constants
-readonly CACHE_ROOT="/tmp/bitnami/pkg/cache"
-readonly DOWNLOAD_URL="https://downloads.bitnami.com/files/stacksmith"
+CACHE_ROOT="/tmp/bitnami/pkg/cache"
+DOWNLOAD_URL="https://downloads.bitnami.com/files/stacksmith"
 
 # Functions
 

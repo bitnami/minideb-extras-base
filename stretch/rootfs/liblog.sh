@@ -3,12 +3,12 @@
 # Library for logging functions
 
 # Constants
-readonly RESET='\033[0m'
-readonly RED='\033[38;5;1m'
-readonly GREEN='\033[38;5;2m'
-readonly YELLOW='\033[38;5;3m'
-readonly MAGENTA='\033[38;5;5m'
-readonly CYAN='\033[38;5;6m'
+RESET='\033[0m'
+RED='\033[38;5;1m'
+GREEN='\033[38;5;2m'
+YELLOW='\033[38;5;3m'
+MAGENTA='\033[38;5;5m'
+CYAN='\033[38;5;6m'
 
 # Functions
 

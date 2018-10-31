@@ -6,7 +6,7 @@
 . /liblog.sh
 
 # Constants
-readonly BOLD='\033[1m'
+BOLD='\033[1m'
 
 # Functions
 
@@ -38,7 +38,7 @@ print_welcome_page() {
 #   None
 #########################
 print_image_welcome_page() {
-    readonly github_url="https://github.com/bitnami/bitnami-docker-${BITNAMI_APP_NAME}"
+    local github_url="https://github.com/bitnami/bitnami-docker-${BITNAMI_APP_NAME}"
 
     log ""
     log "${BOLD}Welcome to the Bitnami ${BITNAMI_APP_NAME} container${RESET}"
