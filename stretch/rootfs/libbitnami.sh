@@ -6,8 +6,7 @@
 . /liblog.sh
 
 # Constants
-BOLD='\033[1m'
-DISABLE_WELCOME_MESSAGE="${DISABLE_WELCOME_MESSAGE:-}"
+readonly BOLD='\033[1m'
 
 # Functions
 
@@ -22,7 +21,7 @@ DISABLE_WELCOME_MESSAGE="${DISABLE_WELCOME_MESSAGE:-}"
 #   None
 #########################
 print_welcome_page() {
-    if [[ -z "$DISABLE_WELCOME_MESSAGE" ]]; then
+    if [[ -z "${DISABLE_WELCOME_MESSAGE:-}" ]]; then
         if [[ -n "$BITNAMI_APP_NAME" ]]; then
             print_image_welcome_page
         fi
