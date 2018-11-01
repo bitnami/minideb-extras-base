@@ -1,46 +1,57 @@
 #!/bin/bash
+#
+# Library for managing services
 
+# Functions
 
-. /liblog.sh
-
-# Reads the provided pid file and returns a PID
-get_pid() {
+########################
+# Read the provided pid file and returns a PID
+# Arguments:
+#   $1 - Pid file
+# Returns:
+#   PID
+#########################
+get_pid_from_file() {
     local pid_file="${1:?pid file is missing}"
-    # check for pidfile
-    if [ -f "$pid_file" ] ; then
-        local pid=""
-        read pid < "$pid_file"
-        if [ ! -z "$pid" ] && [ "$pid" -gt 0 ]; then
-            echo "$pid"
-        fi
+
+    if [[ -f "$pid_file" ]]; then
+        if [[ -n "$(< "$pid_file")" ]] && [[ "$(< "$pid_file")" -gt 0 ]]; then
+            echo "$(< "$pid_file")"
+	fi
     fi
 }
 
-# Checks if a provided pid corresponds to a running service
+########################
+# Check if a provided PID corresponds to a running service
+# Arguments:
+#   $1 - PID
+# Returns:
+#   Boolean
+#########################
 is_service_running() {
     local pid="${1:?pid is missing}"
-    if kill -0 "$pid" 2>/dev/null ; then
-        true
-    else
-        false
-    fi
+
+    kill -0 "$pid" 2>/dev/null
 }
 
-# Stops a service by sending a termination signal to its pid
+########################
+# Stop a service by sending a termination signal to its pid
+# Arguments:
+#   $1 - Pid file
+# Returns:
+#   None
+#########################
 stop_service_using_pid() {
     local pid_file="${1:?pid file is missing}"
     local pid
 
-    pid=$(get_pid "$pid_file")
-    if [ -z "$pid" ] || ! is_service_running "$pid"; then
-        return
-    fi
+    pid="$(get_pid_from_file "$pid_file")"
+    [[ -z "$pid" ]] || ! is_service_running "$pid" && return
 
     kill "$pid"
     local counter=10
-
-    while [ "$counter" -ne 0 ] && is_service_running "$pid"; do
-        sleep 1;
+    while [[ "$counter" -ne 0 ]] && is_service_running "$pid"; do
+        sleep 1
         counter=$((counter - 1))
     done
 }
