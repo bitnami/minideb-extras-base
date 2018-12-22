@@ -1,4 +1,4 @@
-FROM bitnami/minideb@sha256:171b694caf615d9970c70f24b9e973d189a10ca51e7d814fd3f48e06a852fa4f
+FROM bitnami/minideb@sha256:376fb82db529039a447cb88a271d8843cc43acf02c04cdaa9d81cf67a92ba4e7
 LABEL maintainer "Bitnami <containers@bitnami.com>"
 ENV IMAGE_OS=debian-9
 
@@ -6,7 +6,7 @@ ENV IMAGE_OS=debian-9
 RUN mkdir --parents /opt/bitnami
 RUN install_packages ca-certificates curl procps
 
-ENV BITNAMI_IMAGE_VERSION=stretch-r107
+ENV BITNAMI_IMAGE_VERSION=stretch-r108
 
 COPY rootfs /
 
