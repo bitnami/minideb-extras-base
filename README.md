@@ -6,7 +6,7 @@
 ## TL;DR
 
 ```dockerfile
-FROM bitnami/minideb-extras-base:strech
+FROM bitnami/minideb-extras-base:stretch
 ```
 
 ## About
