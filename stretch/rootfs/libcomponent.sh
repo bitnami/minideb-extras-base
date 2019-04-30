@@ -59,6 +59,6 @@ component_unpack() {
         echo "Verifying package integrity"
         echo "$package_sha256  ${base_name}.tar.gz" | sha256sum --check -
     fi
-    tar --directory /opt/bitnami --extract --gunzip --file "${base_name}.tar.gz" --no-same-owner --strip-components=2 "${base_name}/files/${name}"
+    tar --directory /opt/bitnami --extract --gunzip --file "${base_name}.tar.gz" --no-same-owner --strip-components=2 "${base_name}/files/"
     rm "${base_name}.tar.gz"
 }
