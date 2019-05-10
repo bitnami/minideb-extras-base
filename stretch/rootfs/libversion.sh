@@ -32,7 +32,7 @@ get_sematic_version () {
             ((i++))
         done
 
-        if [ -n "$2" ]; then
+        if [ -n "$section" ]; then
             echo "${version_sections[$section]}"
             return
         fi
