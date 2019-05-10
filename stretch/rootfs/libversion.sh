@@ -39,7 +39,7 @@ get_sematic_version () {
         if [[ "$section" =~ $number_regex ]] && (( $section > 0 )) && (( $section <= 3 )); then
              echo "${version_sections[$section]}"
              return
-         else
+        else
             stderr_print "Section allowed values are: 1, 2, and 3"
             return 1
         fi
