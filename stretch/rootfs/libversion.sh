@@ -14,7 +14,9 @@
 get_sematic_version () {
     local version="${1:?version is required}"
     local section="${2:?section is required}"
+    declare -a version_sections
 
+    #Regex to parse versions: x.y.z
     local -r regex='([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?'
 
     if [[ "$version" =~ $regex ]]; then
