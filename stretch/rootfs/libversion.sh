@@ -4,7 +4,7 @@
 
 # Functions
 ########################
-# Gets version 
+# Gets semantic version 
 # Arguments:
 #   $1 - version: string to extract major.minor.patch
 #   $2 - section: 1 to extract major, 2 to extract minor, 3 to extract patch
