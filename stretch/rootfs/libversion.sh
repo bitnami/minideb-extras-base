@@ -2,6 +2,9 @@
 #
 # Library for managing versions strings
 
+# Load Generic Libraries
+. ./liblog.sh
+
 # Functions
 ########################
 # Gets semantic version 
@@ -14,15 +17,15 @@
 get_sematic_version () {
     local version="${1:?version is required}"
     local section="${2:?section is required}"
-    declare -a version_sections
+    local -a version_sections
 
     #Regex to parse versions: x.y.z
     local -r regex='([0-9]+)(\.([0-9]+)(\.([0-9]+))?)?'
 
     if [[ "$version" =~ $regex ]]; then
-        i=1
-        j=1
-        n=${#BASH_REMATCH[*]}
+        local i=1
+        local j=1
+        local n=${#BASH_REMATCH[*]}
 
         while [[ $i -lt $n ]]; do
             if [[ -n "${BASH_REMATCH[$i]}" ]] && [[ "${BASH_REMATCH[$i]:0:1}" != '.' ]];  then
@@ -32,11 +35,13 @@ get_sematic_version () {
             ((i++))
         done
 
-        if [ -n "$section" ]; then
-            echo "${version_sections[$section]}"
-            return
+        local number_regex='^[0-9]+$'
+        if [[ "$section" =~ $number_regex ]] && (( $section > 0 )) && (( $section <= 3 )); then
+             echo "${version_sections[$section]}"
+             return
+         else
+            stderr_print "Section allowed values are: 1, 2, and 3"
+            return 1
         fi
     fi
-    echo 
 }
-
