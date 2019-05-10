@@ -31,10 +31,10 @@ get_sematic_version () {
         done
 
         if [ -n "$2" ]; then
-          echo "${version_sections[$section]}"
-          return
+            echo "${version_sections[$section]}"
+            return
         fi
-  fi
-  echo 
+    fi
+    echo 
 }
 
