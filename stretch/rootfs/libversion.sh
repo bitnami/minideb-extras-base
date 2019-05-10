@@ -21,7 +21,7 @@ get_sematic_version () {
 
         while [[ $i -lt $n ]]
         do
-            if [ ! -z "${BASH_REMATCH[$i]}" ] && [ "${BASH_REMATCH[$i]:0:1}" != '.' ]
+            if [ -n "${BASH_REMATCH[$i]}" ] && [ "${BASH_REMATCH[$i]:0:1}" != '.' ]
             then
                 version[$j]=${BASH_REMATCH[$i]}
                 let j++
