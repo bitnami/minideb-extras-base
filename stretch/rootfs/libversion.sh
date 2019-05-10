@@ -26,7 +26,7 @@ get_sematic_version () {
                 version[$j]=${BASH_REMATCH[$i]}
                 ((j++))
             fi
-            let i++
+            ((i++))
         done
         if [ -n "$2" ]
         then
