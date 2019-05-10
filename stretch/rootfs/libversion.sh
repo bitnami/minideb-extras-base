@@ -28,7 +28,7 @@ get_sematic_version () {
             fi
             let i++
         done
-        if [ ! -z "$2" ]
+        if [ -n "$2" ]
         then
           echo "${version[$2]}"
           return
