@@ -90,3 +90,20 @@ am_i_root() {
 get_total_memory() {
     echo $(($(grep MemTotal /proc/meminfo | awk '{print $2}') / 1024))
 }
+
+#########################
+# Redirects output to /dev/null if debug mode is disabled
+# Globals:
+#   BITNAMI_DEBUG
+# Arguments:
+#   $@ - Command to execute
+# Returns:
+#   None
+#########################
+debug_execute() {
+    if ${BITNAMI_DEBUG:-false}; then
+        "$@"
+    else
+        "$@" >/dev/null 2>&1
+    fi
+}
