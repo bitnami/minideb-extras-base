@@ -107,3 +107,26 @@ debug_execute() {
         "$@" >/dev/null 2>&1
     fi
 }
+
+########################
+# Retries a command until timeout
+# Arguments:
+#   $1 - cmd (as a string)
+#   $2 - timeout (in seconds). Default: 60
+#   $3 - step (in seconds). Default: 5
+# Returns:
+#   None
+#########################
+retry_while() {
+    local -r cmd="$1:?cmd is missing"
+    local -r timeout="${2:-60}"
+    local -r step="${3:-5}"
+    local return_value=1
+
+    read -r -a command <<< "$cmd"
+    for ((i = 0 ; i <= timeout ; i+=step )); do
+        "${command[@]}" && return_value=0 && break
+        sleep "$step"
+    done
+    return $return_value
+}
