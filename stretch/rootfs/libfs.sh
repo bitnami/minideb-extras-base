@@ -76,7 +76,7 @@ configure_permissions() {
             find -L "$p" -type d -exec chmod "$dir_mode" {} \;
             find -L "$p" -type f -exec chmod "$file_mode" {} \;
         else
-            warn "$p do not exist!!"
+            warn "$p does not exist!!"
         fi
     done
 }
@@ -102,7 +102,7 @@ configure_ownership() {
       if [[ -e "$p" ]]; then
           chown -LR "$user":"$group" "$p"
       else
-          warn "$p do not exist!!"
+          warn "$p does not exist!!"
       fi
   done
 }
