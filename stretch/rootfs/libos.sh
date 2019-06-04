@@ -115,7 +115,7 @@ debug_execute() {
 #   $2 - timeout (in seconds). Default: 60
 #   $3 - step (in seconds). Default: 5
 # Returns:
-#   None
+#   Boolean
 #########################
 retry_while() {
     local -r cmd="$1:?cmd is missing"
