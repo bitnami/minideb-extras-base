@@ -2,6 +2,9 @@
 #
 # Library for file system actions
 
+# Load Generic Libraries
+. ./liblog.sh
+
 # Functions
 
 ########################
@@ -55,78 +58,64 @@ is_dir_empty() {
 }
 
 ########################
-# Configure permisions recursively
-# Globals:
-#   None
-# Arguments:
-#   $1 - paths (as a string).
-#   $2 - mode for directories. Default: 777
-#   $3 - mode for files. Default: 666
-# Returns:
-#   None
-#########################
-configure_permissions() {
-    local -r paths="${1:?paths is missing}"
-    local -r dir_mode="${2:-777}"
-    local -r file_mode="${3:-666}"
-
-    read -r -a filepaths <<< "$paths"
-    for p in "${filepaths[@]}"; do
-        if [[ -e "$p" ]]; then
-            find -L "$p" -type d -exec chmod "$dir_mode" {} \;
-            find -L "$p" -type f -exec chmod "$file_mode" {} \;
-        else
-            warn "$p does not exist!!"
-        fi
-    done
-}
-
-########################
-# Configure ownership recursively
-# Globals:
-#   None
-# Arguments:
-#   $1 - paths (as a string).
-#   $2 - user. Default: $(id -u)
-#   $3 - group. Default: $(id -g)
-# Returns:
-#   None
-#########################
-configure_ownership() {
-    local -r paths="${1:?paths is missing}"
-    local -r user="${2:-$(id -u)}"
-    local -r group="${3:-$(id -g)}"
-
-    read -r -a filepaths <<< "$paths"
-    for p in "${filepaths[@]}"; do
-      if [[ -e "$p" ]]; then
-          chown -LR "$user":"$group" "$p"
-      else
-          warn "$p does not exist!!"
-      fi
-  done
-}
-
-########################
 # Configure permisions and ownership recursively
 # Globals:
 #   None
 # Arguments:
 #   $1 - paths (as a string).
-#   $2 - mode for directories. Default: 777
-#   $3 - mode for files. Default: 666
-#   $4 - user. Default: $(id -u)
-#   $5 - group. Default: $(id -g)
+# Flags:
+#   -f|--file-mode - mode for directories.
+#   -d|--dir-mode - mode for files.
+#   -u|--user - user
+#   -g|--group - group
 # Returns:
 #   None
 #########################
 configure_permissions_ownership() {
     local -r paths="${1:?paths is missing}"
-    local -r dir_mode="${2:-777}"
-    local -r file_mode="${3:-666}"
-    local -r user="${4:-$(id -u)}"
-    local -r group="${5:-$(id -g)}"
+    local dir_mode=""
+    local file_mode=""
+    local user=""
+    local group=""
 
-    configure_permissions "$paths" "$dir_mode" "$file_mode"
-    configure_ownership "$paths" "$user" "$group"
+    # Validate arguments
+    shift 1
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            -f|--file-mode)
+                shift
+                file_mode="${1:?missing mode for directories}"
+                ;;
+            -d|--dir-mode)
+                shift
+                dir_mode="${1:?missing mode for files}"
+                ;;
+            -u|--user)
+                shift
+                user="${1:?missing user}"
+                ;;
+            -g|--group)
+                shift
+                group="${1:?missing group}"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+
+    read -r -a filepaths <<< "$paths"
+    for p in "${filepaths[@]}"; do
+        if [[ -e "$p" ]]; then
+            [[ -n $dir_mode ]] && find -L "$p" -type d -exec chmod "$dir_mode" {} \;
+            [[ -n $file_mode ]] && find -L "$p" -type f -exec chmod "$file_mode" {} \;
+            [[ -n $user ]] && [[ -n $group ]] && chown -LR "$user":"$group" "$p"
+            [[ -n $user ]] && [[ -z $group ]] && chown -LR "$user" "$p"
+            [[ -z $user ]] && [[ -n $group ]] && chgrp -LR "$group" "$p"
+        else
+            warn "$p does not exist!!"
+        fi
+    done
 }
