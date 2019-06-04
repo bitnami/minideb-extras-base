@@ -84,11 +84,11 @@ configure_permissions_ownership() {
         case "$1" in
             -f|--file-mode)
                 shift
-                file_mode="${1:?missing mode for directories}"
+                file_mode="${1:?missing mode for files}"
                 ;;
             -d|--dir-mode)
                 shift
-                dir_mode="${1:?missing mode for files}"
+                dir_mode="${1:?missing mode for directories}"
                 ;;
             -u|--user)
                 shift
@@ -115,7 +115,7 @@ configure_permissions_ownership() {
             [[ -n $user ]] && [[ -z $group ]] && chown -LR "$user" "$p"
             [[ -z $user ]] && [[ -n $group ]] && chgrp -LR "$group" "$p"
         else
-            warn "$p does not exist!!"
+            warn "$p does not exist"
         fi
     done
 }
