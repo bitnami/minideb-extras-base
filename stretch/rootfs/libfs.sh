@@ -53,3 +53,35 @@ is_dir_empty() {
         false
     fi
 }
+
+########################
+# Configure permisions recursively
+# Globals:
+#   None
+# Arguments:
+#   $1 - paths (as a string).
+#   $2 - mode for directories. Default: 777
+#   $3 - mode for files. Default: 666
+#   $4 - user. Default: $(id -u)
+#   $5 - group. Default: $(id -g)
+# Returns:
+#   None
+#########################
+configure_permissions() {
+    local -r paths="${1:?paths is missing}"
+    local -r dir_mode="${2:-777}"
+    local -r file_mode="${3:-666}"
+    local -r user="${4:-$(id -u)}"
+    local -r group="${5:-$(id -g)}"
+
+    read -r -a filepaths <<< "$paths"
+    for p in "${filepaths[@]}"; do
+        if [[ -e "$p" ]]; then
+            find -L "$p" -type d -exec chmod "$dir_mode" {} \;
+            find -L "$p" -type f -exec chmod "$file_mode" {} \;
+            chown -LR "$user":"$group" "$p"
+        else
+            warn "$p do not exist!!"
+        fi
+    done
+}
