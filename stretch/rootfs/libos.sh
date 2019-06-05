@@ -118,7 +118,7 @@ debug_execute() {
 #   Boolean
 #########################
 retry_while() {
-    local -r cmd="$1:?cmd is missing"
+    local -r cmd="${1:?cmd is missing}"
     local -r timeout="${2:-60}"
     local -r step="${3:-5}"
     local return_value=1
