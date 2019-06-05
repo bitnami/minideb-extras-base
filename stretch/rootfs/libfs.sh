@@ -2,6 +2,9 @@
 #
 # Library for file system actions
 
+# Load Generic Libraries
+. ./liblog.sh
+
 # Functions
 
 ########################
@@ -33,7 +36,7 @@ ensure_dir_exists() {
 
     mkdir -p "${dir}"
     if [[ "$owner" != "" ]]; then
-	owned_by "$dir" "$owner"
+        owned_by "$dir" "$owner"
     fi
 }
 
@@ -52,4 +55,67 @@ is_dir_empty() {
     else
         false
     fi
+}
+
+########################
+# Configure permisions and ownership recursively
+# Globals:
+#   None
+# Arguments:
+#   $1 - paths (as a string).
+# Flags:
+#   -f|--file-mode - mode for directories.
+#   -d|--dir-mode - mode for files.
+#   -u|--user - user
+#   -g|--group - group
+# Returns:
+#   None
+#########################
+configure_permissions_ownership() {
+    local -r paths="${1:?paths is missing}"
+    local dir_mode=""
+    local file_mode=""
+    local user=""
+    local group=""
+
+    # Validate arguments
+    shift 1
+    while [ "$#" -gt 0 ]; do
+        case "$1" in
+            -f|--file-mode)
+                shift
+                file_mode="${1:?missing mode for files}"
+                ;;
+            -d|--dir-mode)
+                shift
+                dir_mode="${1:?missing mode for directories}"
+                ;;
+            -u|--user)
+                shift
+                user="${1:?missing user}"
+                ;;
+            -g|--group)
+                shift
+                group="${1:?missing group}"
+                ;;
+            *)
+                echo "Invalid command line flag $1" >&2
+                return 1
+                ;;
+        esac
+        shift
+    done
+
+    read -r -a filepaths <<< "$paths"
+    for p in "${filepaths[@]}"; do
+        if [[ -e "$p" ]]; then
+            [[ -n $dir_mode ]] && find -L "$p" -type d -exec chmod "$dir_mode" {} \;
+            [[ -n $file_mode ]] && find -L "$p" -type f -exec chmod "$file_mode" {} \;
+            [[ -n $user ]] && [[ -n $group ]] && chown -LR "$user":"$group" "$p"
+            [[ -n $user ]] && [[ -z $group ]] && chown -LR "$user" "$p"
+            [[ -z $user ]] && [[ -n $group ]] && chgrp -LR "$group" "$p"
+        else
+            stderr_print "$p does not exist"
+        fi
+    done
 }
