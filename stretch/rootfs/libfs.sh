@@ -115,7 +115,7 @@ configure_permissions_ownership() {
             [[ -n $user ]] && [[ -z $group ]] && chown -LR "$user" "$p"
             [[ -z $user ]] && [[ -n $group ]] && chgrp -LR "$group" "$p"
         else
-            warn "$p does not exist"
+            stderr_print "$p does not exist"
         fi
     done
 }
