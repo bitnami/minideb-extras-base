@@ -3,7 +3,7 @@
 # Library for file system actions
 
 # Load Generic Libraries
-. ./liblog.sh
+. /liblog.sh
 
 # Functions
 
