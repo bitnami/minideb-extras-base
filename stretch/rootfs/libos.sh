@@ -25,7 +25,7 @@ user_exists() {
 #########################
 group_exists() {
     local group="${1:?group is missing}"
-    getent group "$group"
+    getent group "$group" >/dev/null 2>&1
 }
 
 ########################
