@@ -31,7 +31,7 @@ stderr_print() {
 #   None
 #########################
 log() {
-    stderr_print "${BITNAMI_DEBUG:+${CYAN}${MODULE:-} ${MAGENTA}$(date "+%T.%2N ")}${RESET}${*}"
+    stderr_print "${CYAN}${MODULE:-} ${MAGENTA}$(date "+%T.%2N ")${RESET}${*}"
 }
 ########################
 # Log an 'info' message
