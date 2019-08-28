@@ -6,7 +6,7 @@ ENV IMAGE_OS=debian-9
 RUN mkdir --parents /opt/bitnami
 RUN install_packages ca-certificates curl procps
 
-ENV BITNAMI_IMAGE_VERSION=stretch-r345
+ENV BITNAMI_IMAGE_VERSION=stretch-r344
 
 COPY rootfs /
 
