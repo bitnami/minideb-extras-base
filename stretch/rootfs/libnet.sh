@@ -27,3 +27,17 @@ get_machine_ip() {
     dns_lookup "$(hostname)"
 }
 
+########################
+# Check if the provided argument is a resolved hostname
+# Arguments:
+#   $1 - Value to check
+# Returns:
+#   Boolean
+#########################
+is_hostname_resolved() {
+    if dns_lookup "$1" > /dev/null; then
+        true
+    else
+        false 
+    fi
+}

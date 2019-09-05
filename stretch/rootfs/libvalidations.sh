@@ -24,6 +24,22 @@ is_int() {
 }
 
 ########################
+# Check if the provided argument is a positive integer
+# Arguments:
+#   $1 - Value to check
+# Returns:
+#   Boolean
+#########################
+is_positive_int() {
+    local int="${1:?missing value}"
+    if is_int "$1" && (( "${1:-}" < 0 )); then
+        true
+    else
+        false
+    fi
+}
+
+########################
 # Check if the provided argument is a boolean or is the string 'yes/true'
 # Arguments:
 #   $1 - Value to check
@@ -35,6 +51,53 @@ is_boolean_yes() {
     # comparison is performed without regard to the case of alphabetic characters
     shopt -s nocasematch
     if [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
+        true
+    else
+        false
+    fi
+}
+
+########################
+# Check if the provided argument is a boolean yes/no value
+# Arguments:
+#   $1 - Value to check
+# Returns:
+#   Boolean
+#########################
+is_yes_no_value() {
+    local bool="${1:-}"
+    if [[ "$bool" =~ ^(yes|no)$ ]]; then
+        true
+    else
+        false
+    fi
+}
+
+########################
+# Check if the provided argument is a boolean true/false value
+# Arguments:
+#   $1 - Value to check
+# Returns:
+#   Boolean
+#########################
+is_true_false_value() {
+    local bool="${1:-}"
+    if [[ "$bool" =~ ^(true|false)$ ]]; then
+        true
+    else
+        false
+    fi
+}
+
+########################
+# Check if the provided argument is an empty string or not defined
+# Arguments:
+#   $1 - Value to check
+# Returns:
+#   Boolean
+#########################
+is_empty_value() {
+    if [[ -z "${1:-}" ]]; then
         true
     else
         false
