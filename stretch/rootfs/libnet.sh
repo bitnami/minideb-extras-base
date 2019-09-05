@@ -35,7 +35,8 @@ get_machine_ip() {
 #   Boolean
 #########################
 is_hostname_resolved() {
-    if dns_lookup "$1" > /dev/null; then
+    local -r host="${1:?missing value}"
+    if dns_lookup "$host" > /dev/null; then
         true
     else
         false 

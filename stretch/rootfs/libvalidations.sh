@@ -15,7 +15,7 @@
 #   Boolean
 #########################
 is_int() {
-    local int="${1:?missing value}"
+    local -r int="${1:?missing value}"
     if [[ "$int" =~ ^-?[0-9]+ ]]; then
         true
     else
@@ -31,8 +31,8 @@ is_int() {
 #   Boolean
 #########################
 is_positive_int() {
-    local int="${1:?missing value}"
-    if is_int "$1" && (( "${1:-}" < 0 )); then
+    local -r int="${1:?missing value}"
+    if is_int "$int" && (( "${int}" < 0 )); then
         true
     else
         false
@@ -47,7 +47,7 @@ is_positive_int() {
 #   Boolean
 #########################
 is_boolean_yes() {
-    local bool="${1:-}"
+    local -r bool="${1:-}"
     # comparison is performed without regard to the case of alphabetic characters
     shopt -s nocasematch
     if [[ "$bool" = 1 || "$bool" =~ ^(yes|true)$ ]]; then
@@ -65,7 +65,7 @@ is_boolean_yes() {
 #   Boolean
 #########################
 is_yes_no_value() {
-    local bool="${1:-}"
+    local -r bool="${1:-}"
     if [[ "$bool" =~ ^(yes|no)$ ]]; then
         true
     else
@@ -81,7 +81,7 @@ is_yes_no_value() {
 #   Boolean
 #########################
 is_true_false_value() {
-    local bool="${1:-}"
+    local -r bool="${1:-}"
     if [[ "$bool" =~ ^(true|false)$ ]]; then
         true
     else
@@ -97,7 +97,8 @@ is_true_false_value() {
 #   Boolean
 #########################
 is_empty_value() {
-    if [[ -z "${1:-}" ]]; then
+    local -r val="${1:-}"
+    if [[ -z "$val" ]]; then
         true
     else
         false
