@@ -112,7 +112,7 @@ debug_execute() {
 # Retries a command a given number of times
 # Arguments:
 #   $1 - cmd (as a string)
-#   $2 - retries (in seconds). Default: 12
+#   $2 - max retries. Default: 12
 #   $3 - sleep between retries (in seconds). Default: 5
 # Returns:
 #   Boolean
