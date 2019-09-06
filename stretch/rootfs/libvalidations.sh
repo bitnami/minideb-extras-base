@@ -32,7 +32,7 @@ is_int() {
 #########################
 is_positive_int() {
     local -r int="${1:?missing value}"
-    if is_int "$int" && (( "${int}" < 0 )); then
+    if is_int "$int" && (( "${int}" >= 0 )); then
         true
     else
         false
