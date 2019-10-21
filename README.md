@@ -38,7 +38,7 @@ If you encountered a problem running this container, you can file an [issue](../
 
 ## License
 
-Copyright 2015 - 2017 Bitnami
+Copyright 2015 - 2019 Bitnami
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
