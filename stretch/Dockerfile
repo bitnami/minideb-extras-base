@@ -13,7 +13,7 @@ RUN mkdir -p /opt/bitnami/licenses && \
     curl --silent -L https://github.com/bitnami/wait-for-port/releases/download/v1.0/wait-for-port.zip > /tmp/wait-for-port.zip && echo 8d26181f4629211b70db4f96236616056b1ed8e5920d8023f7c883071e76c1ed /tmp/wait-for-port.zip | sha256sum --check && unzip -q -d /usr/local/bin -o /tmp/wait-for-port.zip wait-for-port && curl --silent -L https://raw.githubusercontent.com/bitnami/wait-for-port/master/COPYING > /opt/bitnami/licenses/wait-for-port-1.0.txt && \
     curl --silent -L https://github.com/bitnami/render-template/releases/download/v1.0/render-template.zip > /tmp/render-template.zip && echo 60334a29f9692659f9d3a5d9659f2a97de1f5e7a0fc2e84c1868fdba7f160a9d /tmp/render-template.zip | sha256sum --check && unzip -q -d /usr/local/bin -o /tmp/render-template.zip render-template && curl --silent -L https://raw.githubusercontent.com/bitnami/render-template/master/COPYING > /opt/bitnami/licenses/render-template-1.0.txt
 
-ENV BITNAMI_IMAGE_VERSION=stretch-r378
+ENV BITNAMI_IMAGE_VERSION=stretch-r379
 
 COPY rootfs /
 
