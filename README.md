@@ -1,6 +1,10 @@
 [![CircleCI](https://circleci.com/gh/bitnami/minideb-extras-base/tree/master.svg?style=shield)](https://circleci.com/gh/bitnami/minideb-extras-base/tree/master)
 [![Docker Hub Automated Build](http://container.checkforupdates.com/badges/bitnami/minideb-extras-base)](https://hub.docker.com/r/bitnami/minideb-extras-base/)
 
+# DEPRECATION NOTICE
+
+This image has been deprecated, and will no longer be maintained and updated. Please consider using [bitnami/minideb](https://github.com/bitnami/minideb) instead.
+
 # Base Image for bash-based containers
 
 ## TL;DR
